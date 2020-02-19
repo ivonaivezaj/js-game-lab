@@ -2,12 +2,20 @@ let userPoints = 40;
 let grantPoints = 10;
 let grantDefeated = 0;
 
-const startGame = () => {
-  const userName = prompt("What is your name?");
+function getDamage() {
+  return Math.floor(Math.random() * 5) + 1;
+}
+  function startCombat () {
+  const userName = prompt("What is your name?").toLowerCase();
 
   while (userPoints > 0 && grantDefeated < 3) {
-    userPoints -= Math.floor(Math.random() * 2 + 1);
-    grantPoints -= Math.floor(Math.random() * 2 + 1);
+    const quitGame = prompt("Would you like to attack or quit?").toLowerCase();
+    if (quitGame == "quit"){
+      break;
+    } 
+    else if (quitGame.toLowerCase() == "attack")
+    userPoints = userPoints - getDamage();
+    grantPoints = grantPoints - getDamage();
 
     console.log(`${userName} has ${userPoints} health left`);
     console.log(`Grant has ${grantPoints} health left`);
@@ -17,15 +25,17 @@ const startGame = () => {
       grantDefeated++;
     }
   }
-
-  if (grantDefeated === 3) {
+  if (grantDefeated === 3) {     
     console.log(`${userName} WON`);
   } else {
     console.log("Grant Almighty won!");
   }
-};
-
-const getResponse = prompt("Do you want to play the game?");
-if (getResponse === "Yes") {
-  startGame();
 }
+const startGame = prompt ("Do you want to play the game?").toLowerCase();
+if (startGame == "yes") 
+
+  {
+    startCombat(); 
+  } else 
+  alert ("Bye, Bye");
+
